@@ -11,11 +11,12 @@ This extension contributes the following settings:
 
 * `rabit-move.jump-size`: lines to jump up/down
 
-## Known Issues
+## Extension Keybindings
+
+* `rabit-move.rabit-down`: jump lines up *default(ctrl+alt+down)*
+* `ctrl+alt+up`: jump lines down *default(rabit-move.rabit-up)*
 
 ## Release Notes
-
-Users appreciate release notes as you update your extension.
 
 ### 1.0.0
 
