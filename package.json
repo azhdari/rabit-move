@@ -20,6 +20,10 @@
 		"onCommand:rabit-move.rabit-up"
 	],
 	"main": "./out/extension.js",
+	"repository": {
+		"url": "git+https://github.com/azhdari/rabit-move.git",
+		"type": "git"
+	},
 	"contributes": {
 		"commands": [
 			{

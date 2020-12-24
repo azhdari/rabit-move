@@ -61,7 +61,7 @@ const moveDown = (editor: vscode.TextEditor, size: number) => {
 const scrollTo = (editor: vscode.TextEditor) => {
 	editor.revealRange(
 		editor.selection,
-		vscode.TextEditorRevealType.InCenter
+		vscode.TextEditorRevealType.Default
 	);
 };
 
