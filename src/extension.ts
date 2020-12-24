@@ -29,7 +29,7 @@ const getCharPosition = (editor: vscode.TextEditor, line: number) => {
 	}
 };
 
-const moveUp = (editor: vscode.TextEditor, size: number) => {
+const moveUp = (editor: vscode.TextEditor, size: number, highlight: boolean) => {
 	const position = editor.selection.active;
 
 	let line = position.line - size;;
@@ -39,11 +39,13 @@ const moveUp = (editor: vscode.TextEditor, size: number) => {
 
 	let char = getCharPosition(editor, line);
 
+	const endSelection = editor.selection.end;
+
 	var newPosition = position.with(line, char);
-	var newSelection = new vscode.Selection(newPosition, newPosition);
+	var newSelection = new vscode.Selection(highlight ? endSelection : newPosition, newPosition);
 	editor.selection = newSelection;
 };
-const moveDown = (editor: vscode.TextEditor, size: number) => {
+const moveDown = (editor: vscode.TextEditor, size: number, highlight: boolean) => {
 	const position = editor.selection.active;
 
 	let line = position.line + size;
@@ -54,8 +56,10 @@ const moveDown = (editor: vscode.TextEditor, size: number) => {
 
 	let char = getCharPosition(editor, line);
 
+	const startSelection = editor.selection.start;
+
 	var newPosition = position.with(line, char);
-	var newSelection = new vscode.Selection(newPosition, newPosition);
+	var newSelection = new vscode.Selection(highlight ? startSelection : newPosition, newPosition);
 	editor.selection = newSelection;
 };
 const scrollTo = (editor: vscode.TextEditor) => {
@@ -75,7 +79,7 @@ export function activate(context: vscode.ExtensionContext) {
 		}
 
 		checkIfCharPositionChanged(editor);
-		moveDown(editor, getJumpSize());
+		moveDown(editor, getJumpSize(), false);
 		scrollTo(editor);
 	});
 	let rabitUp = vscode.commands.registerCommand('rabit-move.rabit-up', () => {
@@ -85,12 +89,34 @@ export function activate(context: vscode.ExtensionContext) {
 		}
 
 		checkIfCharPositionChanged(editor);
-		moveUp(editor, getJumpSize());
+		moveUp(editor, getJumpSize(), false);
+		scrollTo(editor);
+	});
+	let rabitSelectDown = vscode.commands.registerCommand('rabit-move.rabit-select-down', () => {
+		const editor = vscode.window.activeTextEditor;
+		if (!editor) {
+			return;
+		}
+
+		checkIfCharPositionChanged(editor);
+		moveDown(editor, getJumpSize(), true);
+		scrollTo(editor);
+	});
+	let rabitSelectUp = vscode.commands.registerCommand('rabit-move.rabit-select-up', () => {
+		const editor = vscode.window.activeTextEditor;
+		if (!editor) {
+			return;
+		}
+
+		checkIfCharPositionChanged(editor);
+		moveUp(editor, getJumpSize(), true);
 		scrollTo(editor);
 	});
 
 	context.subscriptions.push(rabitDown);
 	context.subscriptions.push(rabitUp);
+	context.subscriptions.push(rabitSelectDown);
+	context.subscriptions.push(rabitSelectUp);
 }
 
 export function deactivate() { }

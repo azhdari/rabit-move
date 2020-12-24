@@ -33,6 +33,14 @@
 			{
 				"command": "rabit-move.rabit-up",
 				"title": "Rabit: 3 lines up"
+			},
+			{
+				"command": "rabit-move.rabit-select-down",
+				"title": "Rabit: select 3 lines down."
+			},
+			{
+				"command": "rabit-move.rabit-select-up",
+				"title": "Rabit: select 3 lines up"
 			}
 		],
 		"keybindings": [
@@ -43,6 +51,14 @@
 			{
 				"key": "ctrl+alt+up",
 				"command": "rabit-move.rabit-up"
+			},
+			{
+				"key": "ctrl+alt+shift+down",
+				"command": "rabit-move.rabit-select-down"
+			},
+			{
+				"key": "ctrl+alt+shift+up",
+				"command": "rabit-move.rabit-select-up"
 			}
 		],
 		"configuration": {
