@@ -2,8 +2,10 @@
 
 All notable changes to the "rabit-move" extension will be documented in this file.
 
-Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
+## 2.0.0
+-Fixed selection issue
+-Changed default keybindings to replace default behavior of cursor up/down
 
-## [Unreleased]
+## 1.0.0
 
 - Initial release

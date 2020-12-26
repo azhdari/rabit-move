@@ -39,7 +39,7 @@ const moveUp = (editor: vscode.TextEditor, size: number, highlight: boolean) => 
 
 	let char = getCharPosition(editor, line);
 
-	const endSelection = editor.selection.end;
+	const endSelection = editor.selection.anchor;
 
 	var newPosition = position.with(line, char);
 	var newSelection = new vscode.Selection(highlight ? endSelection : newPosition, newPosition);
@@ -56,7 +56,7 @@ const moveDown = (editor: vscode.TextEditor, size: number, highlight: boolean) =
 
 	let char = getCharPosition(editor, line);
 
-	const startSelection = editor.selection.start;
+	const startSelection = editor.selection.anchor;
 
 	var newPosition = position.with(line, char);
 	var newSelection = new vscode.Selection(highlight ? startSelection : newPosition, newPosition);
@@ -112,11 +112,33 @@ export function activate(context: vscode.ExtensionContext) {
 		moveUp(editor, getJumpSize(), true);
 		scrollTo(editor);
 	});
+	let tortoiseSelectDown = vscode.commands.registerCommand('rabit-move.tortoise-select-down', () => {
+		const editor = vscode.window.activeTextEditor;
+		if (!editor) {
+			return;
+		}
+
+		checkIfCharPositionChanged(editor);
+		moveDown(editor, 1, true);
+		scrollTo(editor);
+	});
+	let tortoiseSelectUp = vscode.commands.registerCommand('rabit-move.tortoise-select-up', () => {
+		const editor = vscode.window.activeTextEditor;
+		if (!editor) {
+			return;
+		}
+
+		checkIfCharPositionChanged(editor);
+		moveUp(editor, 1, true);
+		scrollTo(editor);
+	});
 
 	context.subscriptions.push(rabitDown);
 	context.subscriptions.push(rabitUp);
 	context.subscriptions.push(rabitSelectDown);
 	context.subscriptions.push(rabitSelectUp);
+	context.subscriptions.push(tortoiseSelectDown);
+	context.subscriptions.push(tortoiseSelectUp);
 }
 
 export function deactivate() { }

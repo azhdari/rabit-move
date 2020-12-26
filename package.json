@@ -2,7 +2,7 @@
 	"name": "rabit-move",
 	"displayName": "Rabit Move",
 	"description": "Move around your code rabitly",
-	"version": "1.0.0",
+	"version": "2.0.0",
 	"author": {
 		"name": "Mohammad Azhdari",
 		"email": "azhdari.mhmd@gmail.com",
@@ -28,7 +28,7 @@
 		"commands": [
 			{
 				"command": "rabit-move.rabit-down",
-				"title": "Rabit: 3 lines down."
+				"title": "Rabit: 3 lines down"
 			},
 			{
 				"command": "rabit-move.rabit-up",
@@ -36,29 +36,51 @@
 			},
 			{
 				"command": "rabit-move.rabit-select-down",
-				"title": "Rabit: select 3 lines down."
+				"title": "Rabit: select 3 lines down"
 			},
 			{
 				"command": "rabit-move.rabit-select-up",
 				"title": "Rabit: select 3 lines up"
+			},
+			{
+				"command": "rabit-move.tortoise-select-down",
+				"title": "Rabit: select 1 line down"
+			},
+			{
+				"command": "rabit-move.tortoise-select-up",
+				"title": "Rabit: select 1 line up"
 			}
 		],
 		"keybindings": [
 			{
-				"key": "ctrl+alt+down",
-				"command": "rabit-move.rabit-down"
+				"key": "down",
+				"command": "rabit-move.rabit-down",
+				"when": "inputFocus && !listFocus && !suggestWidgetMultipleSuggestions && !suggestWidgetVisible"
 			},
 			{
-				"key": "ctrl+alt+up",
-				"command": "rabit-move.rabit-up"
+				"key": "up",
+				"command": "rabit-move.rabit-up",
+				"when": "inputFocus && !listFocus && !suggestWidgetMultipleSuggestions && !suggestWidgetVisible"
 			},
 			{
-				"key": "ctrl+alt+shift+down",
-				"command": "rabit-move.rabit-select-down"
+				"key": "shift+down",
+				"command": "rabit-move.rabit-select-down",
+				"when": "textInputFocus"
 			},
 			{
-				"key": "ctrl+alt+shift+up",
-				"command": "rabit-move.rabit-select-up"
+				"key": "shift+up",
+				"command": "rabit-move.rabit-select-up",
+				"when": "textInputFocus"
+			},
+			{
+				"key": "shift+alt+down",
+				"command": "rabit-move.tortoise-select-down",
+				"when": "textInputFocus"
+			},
+			{
+				"key": "shift+alt+up",
+				"command": "rabit-move.tortoise-select-up",
+				"when": "textInputFocus"
 			}
 		],
 		"configuration": {
@@ -82,16 +104,19 @@
 		"test": "node ./out/test/runTest.js"
 	},
 	"devDependencies": {
-		"@types/vscode": "^1.51.0",
 		"@types/glob": "^7.1.3",
 		"@types/mocha": "^8.0.0",
 		"@types/node": "^12.11.7",
-		"eslint": "^7.9.0",
+		"@types/vscode": "^1.51.0",
 		"@typescript-eslint/eslint-plugin": "^4.1.1",
 		"@typescript-eslint/parser": "^4.1.1",
+		"eslint": "^7.9.0",
 		"glob": "^7.1.6",
 		"mocha": "^8.1.3",
 		"typescript": "^4.0.2",
 		"vscode-test": "^1.4.0"
+	},
+	"dependencies": {
+		"vsce": "^1.83.0"
 	}
 }
