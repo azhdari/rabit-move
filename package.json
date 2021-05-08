@@ -2,7 +2,8 @@
 	"name": "rabit-move",
 	"displayName": "Rabit Move",
 	"description": "Move around your code rabitly",
-	"version": "2.1.0",
+	"version": "2.1.1",
+	"icon": "images/rabit-move-logo.png",
 	"author": {
 		"name": "Mohammad Azhdari",
 		"email": "azhdari.mhmd@gmail.com",
@@ -53,32 +54,38 @@
 		],
 		"keybindings": [
 			{
-				"key": "down",
+				"key": "ctrl+down",
+				"mac": "alt+down",
 				"command": "rabit-move.rabit-down",
 				"when": "inputFocus && !listFocus && !suggestWidgetMultipleSuggestions && !suggestWidgetVisible"
 			},
 			{
-				"key": "up",
+				"key": "ctrl+up",
+				"mac": "alt+up",
 				"command": "rabit-move.rabit-up",
 				"when": "inputFocus && !listFocus && !suggestWidgetMultipleSuggestions && !suggestWidgetVisible"
 			},
 			{
-				"key": "shift+down",
+				"key": "ctrl+shift+down",
+				"mac": "alt+shift+down",
 				"command": "rabit-move.rabit-select-down",
 				"when": "textInputFocus"
 			},
 			{
-				"key": "shift+up",
+				"key": "ctrl+shift+up",
+				"mac": "alt+shift+up",
 				"command": "rabit-move.rabit-select-up",
 				"when": "textInputFocus"
 			},
 			{
-				"key": "shift+alt+down",
+				"key": "ctrl+alt+shift+down",
+				"mac": "ctrl+alt+shift+down",
 				"command": "rabit-move.tortoise-select-down",
 				"when": "textInputFocus"
 			},
 			{
-				"key": "shift+alt+up",
+				"key": "ctrl+alt+shift+up",
+				"mac": "ctrl+alt+shift+up",
 				"command": "rabit-move.tortoise-select-up",
 				"when": "textInputFocus"
 			}
