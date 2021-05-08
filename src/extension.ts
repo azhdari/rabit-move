@@ -1,4 +1,5 @@
 import * as vscode from 'vscode';
+import * as Utils from './utilities';
 
 let lastCharPosition = -1;
 let currentCharPosition = -1;
@@ -10,34 +11,11 @@ const checkIfCharPositionChanged = (editor: vscode.TextEditor) => {
 	}
 };
 
-const getCharPosition = (editor: vscode.TextEditor, line: number) => {
-	const position = editor.selection.active;
-	const lineSize = editor.document.lineAt(line).text.length;
-
-	if (lastCharPosition > -1) {
-		if (lineSize > lastCharPosition) {
-			currentCharPosition = lastCharPosition;
-			return lastCharPosition;
-		} else {
-			currentCharPosition = lineSize;
-			return lineSize;
-		}
-	} else {
-		lastCharPosition = position.character;
-		currentCharPosition = lastCharPosition;
-		return lastCharPosition;
-	}
-};
-
 const moveUp = (editor: vscode.TextEditor, size: number, highlight: boolean) => {
 	const position = editor.selection.active;
+	const line = Utils.getFirstNonEmptyLine(editor, position.line - size, "Up");
 
-	let line = position.line - size;;
-	if (line < 0) {
-		line = 0;;
-	}
-
-	let char = getCharPosition(editor, line);
+	let char = Utils.getCharPosition(editor, line, currentCharPosition, lastCharPosition);
 
 	const endSelection = editor.selection.anchor;
 
@@ -47,14 +25,9 @@ const moveUp = (editor: vscode.TextEditor, size: number, highlight: boolean) => 
 };
 const moveDown = (editor: vscode.TextEditor, size: number, highlight: boolean) => {
 	const position = editor.selection.active;
+	const line = Utils.getFirstNonEmptyLine(editor, position.line + size, "Down");
 
-	let line = position.line + size;
-
-	if (line >= editor.document.lineCount) {
-		line = editor.document.lineCount - 1;
-	}
-
-	let char = getCharPosition(editor, line);
+	let char = Utils.getCharPosition(editor, line, currentCharPosition, lastCharPosition);
 
 	const startSelection = editor.selection.anchor;
 
